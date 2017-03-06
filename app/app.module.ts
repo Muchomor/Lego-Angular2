@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 @NgModule({
   // TODO: import FormsModule from @angular/forms
   imports: [BrowserModule],
+  // TODO: add DashboardComponent
   declarations: [AppComponent],
   bootstrap: [AppComponent],
   providers: []
