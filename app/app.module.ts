@@ -3,9 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 
 @NgModule({
-  // TODO: import FormsModule from @angular/forms
+  // TODO: import and add FormsModule from @angular/forms
   imports: [BrowserModule],
-  // TODO: add DashboardComponent
+  // TODO: import and add DashboardComponent
   declarations: [AppComponent],
   bootstrap: [AppComponent],
   providers: []
