@@ -4,7 +4,10 @@
     <p><a class="btn btn-primary btn-lg" href="http://oasp.github.io/" role="button">Learn more about OASP &raquo;</a></p>
 </div>
 
-<!--TODO: replace with Bootstrap grid system-->
-<ul>
-    <li *ngFor="let item of items">{{item.descr}}</li>
-</ul>
+<div class="container">
+    <div class="row">
+        <div *ngFor="let item of items" class="col-md-4">
+            {{item.descr}}
+        </div>
+    </div>
+</div>
