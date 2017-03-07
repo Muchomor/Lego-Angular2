@@ -5,4 +5,5 @@ import { Component } from '@angular/core';
   template: require('app/app.component.html!text')
 })
 export class AppComponent {
+  isCollapsed: boolean = true;
 }
