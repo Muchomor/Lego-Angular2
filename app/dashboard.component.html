@@ -6,8 +6,15 @@
 
 <div class="container">
     <div class="row">
-        <div *ngFor="let item of items" class="col-md-4">
-            {{item.descr}}
+        <div *ngFor="let set of items" class="col-md-4 card">
+            <img style="height: 150px;" class="card-img-top" [src]="set.img_tn" alt="Card image cap">
+            <div class="card-block">
+                <h4 class="card-title">{{set.descr}} Set</h4>
+                <div><label>Name: </label>{{set.descr}}</div>
+                <div><label>Piece count: </label>{{set.pieces}}</div>
+                <div><label>Theme: </label>{{set.theme}}</div>
+                <p><a class="btn btn-secondary" role="button" href="#">View details &raquo;</a></p>
+            </div>
         </div>
     </div>
 </div>
