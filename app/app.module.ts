@@ -1,3 +1,4 @@
+import { LegoShopService } from './legoShop.service';
 import { DashboardComponent } from './dashboard.component';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -7,8 +8,7 @@ import { AppComponent } from './app.component';
   imports: [BrowserModule],
   declarations: [AppComponent, DashboardComponent],
   bootstrap: [AppComponent],
-  // TODO: import and add LegoShopService 
-  providers: []
+  providers: [LegoShopService]
 })
 export class AppModule {
 }

@@ -1,16 +1,19 @@
+import { LegoShopService } from './legoShop.service';
 import { LegoShopSet } from './LegoShopSet';
-import { data } from './data';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
     template: require('./dashboard.component.html!text'),
     selector: 'dashboard'
 })
-// TODO: import OnInit from @angular/core and make the DashboardComponent implement it
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
 
-    // TODO: use constructor in order to inject LegoShopService
-    items: LegoShopSet[] = data;
+    items: LegoShopSet[];
 
-    // TODO: implement ngOnInit method and call LegoShopService.getTop3Sets() method, assign result to items property
+    constructor(private legoShopService: LegoShopService) { }
+
+    ngOnInit(): void {
+        this.items = this.legoShopService.getTop3Sets();
+    }
+
 };

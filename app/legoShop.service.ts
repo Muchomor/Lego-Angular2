@@ -1,16 +1,17 @@
+import { data } from './data';
 import { LegoShopSet } from './LegoShopSet';
-// TODO: import @Injectable decorator from @angular/core
-// TODO: use the decorator to add LegoShopService
-// TODO: implement methods, return data from data.ts file
+import { Injectable } from '@angular/core';
+
+@Injectable()
 export class LegoShopService {
 
+    private legoSets: LegoShopSet[] = data;
+
     getLegoSets(): LegoShopSet[] {
-        // TODO: to be implemented
-        throw new Error('not implemented');
+        return this.legoSets;
     }
 
     getTop3Sets(): LegoShopSet[] {
-        // TODO: to be implemented
-        throw new Error('not implemented');
+        return this.legoSets.splice(0, 3);
     }
 }
