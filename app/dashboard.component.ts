@@ -1,4 +1,11 @@
-// TODO: import @Component decorator from @angular/core and use it to create DashboardComponent
-// TODO: create items array property as placeholder for legoSets
-// TODO: import data from data.ts file and assign it to the items property
-// TODO: create template for the component and list the data (use *ngFor directive) 
+import { LegoShopSet } from './LegoShopSet';
+import { data } from './data';
+import { Component } from '@angular/core';
+
+@Component({
+    template: require('./dashboard.component.html!text'),
+    selector: 'dashboard'
+})
+export class DashboardComponent {
+    items: LegoShopSet[] = data;
+};
