@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
   imports: [BrowserModule],
   declarations: [AppComponent, DashboardComponent],
   bootstrap: [AppComponent],
+  // TODO: import and add LegoShopService 
   providers: []
 })
 export class AppModule {

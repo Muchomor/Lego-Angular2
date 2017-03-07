@@ -7,5 +7,7 @@ import { Component } from '@angular/core';
     selector: 'dashboard'
 })
 export class DashboardComponent {
+
+    // TODO: use constructor in order to inject LegoShopService and call getTop3Sets() method, assign result to items property
     items: LegoShopSet[] = data;
 };
