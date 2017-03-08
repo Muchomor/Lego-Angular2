@@ -59,7 +59,4 @@ export class LegoSetDetailsComponent implements OnInit {
         this.legoSetService.save(this.currentLegoSet);
     }
 
-    diagnostic() {
-        return JSON.stringify(this.currentLegoSet);
-    }
 }

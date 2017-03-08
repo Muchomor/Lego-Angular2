@@ -6,4 +6,12 @@
     .top-buffer {
         margin-top: 30px;
     }
+    .ng-valid[required], .ng-valid.required  {
+        border-left: 5px solid #42A948; /* green */
+    }
+
+    .ng-invalid.ng-touched:not(form)  {
+        border-left: 5px solid #a94442; /* red */
+    }
+
 }
