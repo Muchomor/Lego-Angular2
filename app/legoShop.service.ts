@@ -7,10 +7,13 @@ export class LegoShopService {
 
     private legoSets: LegoShopSet[] = data;
 
-    // TODO: modify this method by adding optional query string parameter and filter the results
-    // Hint: getLegoSets(query?: string): LegoShopSet[]
-    getLegoSets(): LegoShopSet[] {
-        return this.legoSets;
+    getLegoSets(query?: string): LegoShopSet[] {
+        return this.legoSets.filter(val => {
+            if (!query) {
+                return true;
+            }
+            return val && val.descr && val.descr.toUpperCase().indexOf(query.toUpperCase()) !== -1;
+        });
     }
 
     getTop3Sets(): LegoShopSet[] {
@@ -18,7 +21,6 @@ export class LegoShopService {
     }
 
     findOne(id: string): LegoShopSet {
-        // TODO: implement method
-        throw (new Error('not implemented yet'));
-    };
+        return this.legoSets.filter(val => val && val.set_id && val.set_id === id)[0];
+    }
 }
