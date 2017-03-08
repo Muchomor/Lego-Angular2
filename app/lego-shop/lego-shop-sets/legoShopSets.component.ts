@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { LegoShopSet } from './LegoShopSet';
-import { LegoShopService } from './legoShop.service';
+import { LegoShopSet } from './../../shared/LegoShopSet';
+import { LegoShopService } from './../../shared/legoShop.service';
 
 
 @Component({

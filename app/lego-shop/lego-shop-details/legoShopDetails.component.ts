@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { LegoShopSet } from './LegoShopSet';
+import { LegoShopSet } from './../../shared/LegoShopSet';
 import { ActivatedRoute, Router } from '@angular/router';
-import { LegoShopService } from './legoShop.service';
+import { LegoShopService } from './../../shared/legoShop.service';
 
 @Component({
     template: require('./legoShopDetails.component.html!text')

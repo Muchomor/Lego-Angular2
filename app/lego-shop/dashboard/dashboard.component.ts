@@ -1,5 +1,5 @@
-import { LegoShopService } from './legoShop.service';
-import { LegoShopSet } from './LegoShopSet';
+import { LegoShopService } from './../../shared/legoShop.service';
+import { LegoShopSet } from './../../shared/LegoShopSet';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
