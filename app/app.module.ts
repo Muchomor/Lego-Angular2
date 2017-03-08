@@ -1,3 +1,6 @@
+import { LegoModule } from './lego/lego.module';
+import { LegoSetDetailsComponent } from './lego/lego-set-details/legoSetDetails.component';
+import { LegoSetsComponent } from './lego/lego-sets/legoSets.component';
 import { LegoShopModule } from './lego-shop/legoShop.module';
 import { FormsModule } from '@angular/forms';
 import { LegoShopDetailsComponent } from './lego-shop/lego-shop-details/legoShopDetails.component';
@@ -20,6 +23,18 @@ const appRoutes: Routes = [
         component: DashboardComponent
     },
     {
+        path: 'lego-sets',
+        component: LegoSetsComponent
+    },
+    {
+        path: 'lego-set-details',
+        component: LegoSetDetailsComponent
+    },
+    {
+        path: 'lego-set-details/:legoSetId',
+        component: LegoSetDetailsComponent
+    },
+    {
         path: 'lego-shop',
         component: LegoShopSetsComponent
     },
@@ -29,18 +44,10 @@ const appRoutes: Routes = [
     }
 ];
 
-// TODO: move DashboardComponent, LegoShopDetailsComponent, LegoShopSetsComponent to the app/lego-shop directory
-// TODO: create LegoShopModule in app/lego-shop directory
-// TODO: move DashboardComponent, LegoShopDetailsComponent, LegoShopSetsComponent to the LegoShopModule
-// TODO: import LegoShopModule into the AppModule
-// TODO: create LegoModule in app/lego directory
-// TODO: create LegoSetDetailsComponent in the app/lego directory (LegoModule), create route for the dialog
-// TODO: create LegoSetsComponent in the app/lego directory (LegoModule), create route for the dialog
-// TODO: import LegoModule into the AppModule
 // TODO: create AppRoutingModule and move routes definition there, import AppRoutingModule in AppModule
 
 @NgModule({
-    imports: [BrowserModule, RouterModule.forRoot(appRoutes), FormsModule, LegoShopModule],
+    imports: [BrowserModule, RouterModule.forRoot(appRoutes), FormsModule, LegoShopModule, LegoModule],
     declarations: [AppComponent],
     bootstrap: [AppComponent],
     providers: [LegoShopService]

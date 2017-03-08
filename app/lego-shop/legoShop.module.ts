@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
 @NgModule({
     imports: [CommonModule, RouterModule],
     declarations: [LegoShopSetsComponent, LegoShopDetailsComponent, DashboardComponent],
-    exports: [ ],
+    exports: [],
     providers: []
 })
 export class LegoShopModule {
