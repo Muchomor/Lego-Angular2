@@ -1,5 +1,4 @@
 <div class="container top-buffer">
-  <!--TODO: 2. Add template reference variables for the form and inputs -->
   <!--TODO: 3. Add save method and extend legoSetService to implement save method, handle ngSubmit event -->
   <!--TODO: 4. Disable save button when form not valid -->
   <!--TODO: 5. Add validation (name: required, max length 30), e.g. show error message when imput empty, 
@@ -8,26 +7,25 @@
                 Try to implement a generic getErrorMessageOfField method to provide error messages for different inputs  -->
   <!--TODO: 7. Extra: Reactive forms -->
   
-  <form novalidate>
+  <form #legoSetForm="ngForm" novalidate>
     <div class="form-group row">
       <label for="name" class="col-md-2 col-form-label">Name:</label>
       <div class="col-md-6">
-        <input id="name" class="form-control" type="text">
+        <input id="name" [(ngModel)]="currentLegoSet.name" #name="ngModel" name="name" class="form-control"  type="text">
       </div>
     </div>
     <div class="form-group row">
       <label for="status" class="col-md-2 col-form-label">Status:</label>
       <div class="col-md-6">
-        <select id="status" class="form-control">
-          <option value="val1">New</option>
-          <option value="val2">Updated</option>
+        <select id="status" [(ngModel)]="currentLegoSet.status" #status="ngModel" name="status" class="form-control">
+          <option [value]="status" *ngFor="let status of statuses">{{status}}</option>
         </select>
       </div>
     </div>
     <div class="form-group row">
       <label for="comment" class="col-md-2 col-form-label">Comment:</label>
       <div class="col-md-6">
-        <input id="comment" class="form-control" type="text">
+        <input id="comment" [(ngModel)]="currentLegoSet.comment" #comment="ngModel" name="comment" class="form-control" type="text">
       </div>
     </div>
 
