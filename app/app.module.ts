@@ -1,3 +1,6 @@
+import { FormsModule } from '@angular/forms';
+import { LegoShopDetailsComponent } from './legoShopDetails.component';
+import { LegoShopSetsComponent } from './legoShopSets.component';
 import { RouterModule, Routes } from '@angular/router';
 import { LegoShopService } from './legoShop.service';
 import { DashboardComponent } from './dashboard.component';
@@ -14,11 +17,17 @@ const appRoutes: Routes = [
     {
         path: 'dashboard',
         component: DashboardComponent
+    },
+    {
+        path: 'lego-shop',
+        component: LegoShopSetsComponent
+    },
+    {
+        path: 'lego-shop-details/:legoShopSetId',
+        component: LegoShopDetailsComponent
     }
 ];
 
-// TODO: create LegoShopDetailsComponent, create route for the dialog and load selected LegoShopSet on dialog startup
-// TODO: create LegoShopSetsComponent, create route for the dialog and load all LegoShopSets on dialog startup
 // TODO: move DashboardComponent, LegoShopDetailsComponent, LegoShopSetsComponent to the app/lego-shop directory
 // TODO: create LegoShopModule in app/lego-shop directory
 // TODO: move DashboardComponent, LegoShopDetailsComponent, LegoShopSetsComponent to the LegoShopModule
@@ -30,11 +39,10 @@ const appRoutes: Routes = [
 // TODO: create AppRoutingModule and move routes definition there, import AppRoutingModule in AppModule
 
 @NgModule({
-  // TODO: import FormsModule from @angular/forms
-  imports: [BrowserModule, RouterModule.forRoot(appRoutes)],
-  declarations: [AppComponent, DashboardComponent],
-  bootstrap: [AppComponent],
-  providers: [LegoShopService]
+    imports: [BrowserModule, RouterModule.forRoot(appRoutes), FormsModule],
+    declarations: [AppComponent, DashboardComponent, LegoShopSetsComponent, LegoShopDetailsComponent],
+    bootstrap: [AppComponent],
+    providers: [LegoShopService]
 })
 export class AppModule {
 }

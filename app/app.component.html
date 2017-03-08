@@ -3,18 +3,16 @@
         data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
         </button>
-    <a class="navbar-brand" href="#">LegoApp</a>
+    <a class="navbar-brand" routerLink="/dashboard">LegoApp</a>
 
     <div class="collapse navbar-collapse" id="navbarsExampleDefault" [ngClass]="{collapse: isCollapsed}">
         <ul class="navbar-nav mr-auto">
-            <!--TODO: use routerLink and routerLinkActive directives to create app navigation-->
             <li class="nav-item">
-                <a class="nav-link" href="#">Lego shop</a>
+                <a class="nav-link" routerLink="/lego-shop" routerLinkActive="active">Lego shop</a>
             </li>
         </ul>
-        <!--TODO implement search functionality and redirect to the LegoShopSetsComponent-->
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search">
+        <form (ngSubmit)="search()" class="form-inline my-2 my-lg-0" novalidate>
+            <input [(ngModel)]="currentSearchPhrase" name="searchPhrase" class="form-control mr-sm-2" type="text" placeholder="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
     </div>
