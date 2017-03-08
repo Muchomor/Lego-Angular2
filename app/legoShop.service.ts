@@ -17,7 +17,7 @@ export class LegoShopService {
         return this.legoSets.splice(0, 3);
     }
 
-    findOne(id: string): LegoShopSet[] {
+    findOne(id: string): LegoShopSet {
         // TODO: implement method
         throw (new Error('not implemented yet'));
     };
