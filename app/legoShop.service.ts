@@ -14,7 +14,7 @@ export class LegoShopService {
     }
 
     getTop3Sets(): LegoShopSet[] {
-        return this.legoSets.splice(0, 3);
+        return this.legoSets.slice(0, 3);
     }
 
     findOne(id: string): LegoShopSet {
