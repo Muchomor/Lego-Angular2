@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
+import 'rxjs/add/observable/of';
 @Injectable()
 export class LegoSetService {
 
@@ -14,8 +15,22 @@ export class LegoSetService {
         throw new Error('not implemented');
     }
 
+    private add(legoSet: LegoSet): Observable<Response> {
+        console.log('set added');
+        console.dir(legoSet);
+        return Observable.of();
+    }
+
+    private edit(legoSet: LegoSet): Observable<Response> {
+        console.log('set edited');
+        return Observable.of();
+    }
+
     save(legoSet: LegoSet): Observable<Response> {
-        throw new Error('not implemented');
+        if (legoSet.id) {
+            return this.edit(legoSet);
+        }
+        return this.add(legoSet);
     }
 
     delete(id: number): Observable<Response> {
