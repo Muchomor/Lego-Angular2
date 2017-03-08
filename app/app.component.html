@@ -7,16 +7,19 @@
 
     <div class="collapse navbar-collapse" id="navbarsExampleDefault" [ngClass]="{collapse: isCollapsed}">
         <ul class="navbar-nav mr-auto">
+            <!--TODO: use routerLink and routerLinkActive directives to create app navigation-->
             <li class="nav-item">
                 <a class="nav-link" href="#">Lego shop</a>
             </li>
         </ul>
+        <!--TODO implement search functionality and redirect to the LegoShopSetsComponent-->
         <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="text" placeholder="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
     </div>
 </nav>
+<!--TODO: replace dashbaord selector with router-outlet directive-->
 <dashboard></dashboard>
 
 <div class="container-fluid">
