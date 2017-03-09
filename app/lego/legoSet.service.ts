@@ -4,16 +4,19 @@ import { Response, Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
 import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class LegoSetService {
 
-    // TODO: Implement all the service methods using http, use API exposed by JSON server. Endpoint: '/services/lego-sets'
+    private readonly setsApiBaseUrl = '/services/lego-sets';
+
+    // TODO: Implement all the service methods using http, use API exposed by JSON server
     constructor(private http: Http) {}
 
     getLegoSets(): Observable<LegoSet[]> {
-        console.dir(this.http);
-        return Observable.of();
+        return this.http.get(this.setsApiBaseUrl)
+            .map(res => res.json());
     }
 
     findOne(id: number): Observable<LegoSet> {
