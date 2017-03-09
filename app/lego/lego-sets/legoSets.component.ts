@@ -1,5 +1,7 @@
-import { LegoSet } from '../LegoSet';
 import { Component, OnInit } from '@angular/core';
+
+import { LegoSet } from '../LegoSet';
+import { LegoSetService } from '../legoSet.service';
 
 // TODO: Implement ngOnInit method and initilize legoSets variable with contents delivered by legoSetService.getLegoSets()
 // TODO: Create a view template with table or list to visualize already saved legoSets
@@ -14,7 +16,11 @@ export class LegoSetsComponent implements OnInit {
 
     legoSets: LegoSet[];
 
-    ngOnInit(): void {}
+    constructor(private legoSetService: LegoSetService) {}
+
+    ngOnInit(): void {
+        this.legoSetService.getLegoSets().subscribe();
+    }
 
     editSet(id: number): void {}
 

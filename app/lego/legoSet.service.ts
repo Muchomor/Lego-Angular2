@@ -1,6 +1,6 @@
 import { LegoSet } from './LegoSet';
 import { Injectable } from '@angular/core';
-import { Response } from '@angular/http';
+import { Response, Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
 import 'rxjs/add/observable/of';
@@ -8,11 +8,12 @@ import 'rxjs/add/observable/of';
 @Injectable()
 export class LegoSetService {
 
-    // TODO: Import Http (from '@angular/http) and inject it to LegoSetService 
     // TODO: Implement all the service methods using http, use API exposed by JSON server. Endpoint: '/services/lego-sets'
+    constructor(private http: Http) {}
 
     getLegoSets(): Observable<LegoSet[]> {
-        throw new Error('not implemented');
+        console.dir(this.http);
+        return Observable.of();
     }
 
     findOne(id: number): Observable<LegoSet> {
