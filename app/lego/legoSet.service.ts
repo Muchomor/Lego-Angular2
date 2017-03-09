@@ -4,6 +4,7 @@ import { Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
 import 'rxjs/add/observable/of';
+
 @Injectable()
 export class LegoSetService {
 
@@ -27,7 +28,7 @@ export class LegoSetService {
     }
 
     save(legoSet: LegoSet): Observable<Response> {
-        if (legoSet.id) {
+        if (legoSet.id !== undefined && legoSet.id !== null) {
             return this.edit(legoSet);
         }
         return this.add(legoSet);
