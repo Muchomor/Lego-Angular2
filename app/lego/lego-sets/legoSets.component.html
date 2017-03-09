@@ -7,6 +7,7 @@
                 <th>Name</th>
                 <th>Status</th>
                 <th>Comment</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -16,6 +17,10 @@
                 <td>{{set.name}}</td>
                 <td>{{set.status}}</td>
                 <td>{{set.comment}}</td>
+                <td>
+                    <button class="btn btn-primary" (click)="editSet(set.id)">Edit</button>
+                    <button class="btn btn-danger" (click)="deleteSet(set.id)">Delete</button>
+                </td>
             </tr>
         </tbody>
     </table>

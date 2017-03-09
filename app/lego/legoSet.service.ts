@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Response, Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 
-import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
 
 @Injectable()
@@ -20,18 +19,17 @@ export class LegoSetService {
     }
 
     findOne(id: number): Observable<LegoSet> {
-        throw new Error('not implemented');
+        return this.http.get(`${this.setsApiBaseUrl}/${id}`)
+            .map(res => res.json());
     }
 
     private add(legoSet: LegoSet): Observable<Response> {
-        console.log('set added');
-        console.dir(legoSet);
-        return Observable.of();
+        legoSet.imagePath = 'images/lego_placeholder.png';
+        return this.http.post(this.setsApiBaseUrl, legoSet);
     }
 
     private edit(legoSet: LegoSet): Observable<Response> {
-        console.log('set edited');
-        return Observable.of();
+        return this.http.put(`${this.setsApiBaseUrl}/${legoSet.id}`, legoSet);
     }
 
     save(legoSet: LegoSet): Observable<Response> {
@@ -42,6 +40,6 @@ export class LegoSetService {
     }
 
     delete(id: number): Observable<Response> {
-        throw new Error('not implemented');
+        return this.http.delete(`${this.setsApiBaseUrl}/${id}`);
     }
 }

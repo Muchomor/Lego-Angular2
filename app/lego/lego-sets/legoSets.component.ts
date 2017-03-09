@@ -1,11 +1,11 @@
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+
+import 'rxjs/add/operator/mergeMap';
 
 import { LegoSet } from '../LegoSet';
 import { LegoSetService } from '../legoSet.service';
 
-// TODO: Add buttons to edit and delete content (per table/list row or underneath/floating on page top/bottom)
-// TODO: Navigate to LEGO set details view when edit button clicked/tapped
-// TODO: delete selected set via legoSetService and refresh legoSets when delete completed
 
 @Component({
     template: require('app/lego/lego-sets/legoSets.component.html!text')
@@ -14,7 +14,10 @@ export class LegoSetsComponent implements OnInit {
 
     legoSets: LegoSet[];
 
-    constructor(private legoSetService: LegoSetService) {}
+    constructor(
+        private legoSetService: LegoSetService,
+        private router: Router
+    ) {}
 
     ngOnInit(): void {
         this.legoSetService.getLegoSets().subscribe((res) => {
@@ -22,8 +25,16 @@ export class LegoSetsComponent implements OnInit {
         });
     }
 
-    editSet(id: number): void {}
+    editSet(id: number): void {
+        this.router.navigate(['lego-set-details', id]);
+    }
 
-    deleteSet(id: number) {}
+    deleteSet(id: number) {
+        this.legoSetService.delete(id)
+            .flatMap(res => this.legoSetService.getLegoSets())
+            .subscribe(data => {
+                this.legoSets = data;
+            });
+    }
 
 }
