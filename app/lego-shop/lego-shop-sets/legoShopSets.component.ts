@@ -25,7 +25,8 @@ export class LegoShopSetsComponent implements OnInit {
   }
 
   searchBySearchPhrase(searchPhrase: string) {
-    this.legoShopSets = this.legoShopService.getLegoSets(searchPhrase);
+    this.legoShopService.getLegoSets(searchPhrase)
+      .subscribe(legoShopSets => this.legoShopSets = legoShopSets);
   }
 
   showDetails(legoShopSetId: number): void {

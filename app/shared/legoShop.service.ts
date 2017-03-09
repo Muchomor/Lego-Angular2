@@ -1,21 +1,44 @@
-import { data } from './data';
-import { LegoShopSet } from './LegoShopSet';
 import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/first';
 
-
-// TODO: convert all methods to use API exposed by json-server. Endpoint: '/services/lego-shop-sets/'
-// TODO: API will return a list of LEGo sets, use it to implement getLegoSets, add private filterByQuery method to filter the results.  
-// TODO: when implementing findOne method, use existing getLegoSets and add private filterById  method to find the required result.
-// TODO: when implementing getTop3Sets, use getLegoSets methid and 'Fire' as query value, 
-// TODO: add error handling in form of a simple function acting as logging proxy
+import { LegoShopSet } from './LegoShopSet';
+import { toJson, loggingErrorProxy }  from './utils';
 
 @Injectable()
 export class LegoShopService {
 
-    private legoSets: LegoShopSet[] = data;
+    // JSON-SERVER API
+    private readonly jsonServerApiUrl = '/services/lego-shop-sets/';
 
-    getLegoSets(query?: string): LegoShopSet[] {
-        return this.legoSets.filter(val => {
+    constructor(private http: Http) {};
+
+    getLegoSets(query?: string): Observable<LegoShopSet[]> {
+        return this.http.get(this.jsonServerApiUrl)
+            .map(toJson)
+            .map(body => body.results || {})
+            .map(legoShopSets => this.filterByQuery(legoShopSets, query))
+            .catch(loggingErrorProxy);
+    }
+
+    findOne(id: string): Observable<LegoShopSet> {
+          return this.getLegoSets()
+            .map(legoShopSets => this.filterById(legoShopSets, id));
+    }
+
+
+    getTop3Sets(): Observable<LegoShopSet[]> {
+        return this.getLegoSets('Fire')
+            .map(legoShopSets => legoShopSets.slice(0, 3));
+    }
+
+
+    private filterByQuery(legoShopSets: LegoShopSet[], query?: string): LegoShopSet[] {
+        return legoShopSets.filter(val => {
             if (!query) {
                 return true;
             }
@@ -23,11 +46,8 @@ export class LegoShopService {
         });
     }
 
-    getTop3Sets(): LegoShopSet[] {
-        return this.legoSets.slice(0, 3);
+    private filterById(legoShopSets: LegoShopSet[], id: string): LegoShopSet {
+        return legoShopSets.filter(val => val && val.set_id && val.set_id === id)[0];
     }
 
-    findOne(id: string): LegoShopSet {
-        return this.legoSets.filter(val => val && val.set_id && val.set_id === id)[0];
-    }
 }

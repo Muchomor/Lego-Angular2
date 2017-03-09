@@ -1,11 +1,10 @@
-import { LegoShopSet } from './../../shared/LegoShopSet';
 import { LegoSet, Status } from './../LegoSet';
 import { LegoSetService } from './../legoSet.service';
 import { LegoShopService } from './../../shared/legoShop.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-// TODO: Extend legoShopService to use Http and align showLegoSetDetailsByLegoShopSetId method 
+
 // TODO: Implement showLegoSetDetailsById method, use legoSetService to find specific set by id
 // TODO: implement save method, re-implement legoSetService save method to use API exposed by json-server
 
@@ -42,14 +41,18 @@ export class LegoSetDetailsComponent implements OnInit {
     }
 
     showLegoSetDetailsByLegoShopSetId(legoShopSetId: string) {
-        let legoShopSet: LegoShopSet = this.legoShopService.findOne(legoShopSetId);
-
-        this.currentLegoSet = <LegoSet>{
-            externalId: legoShopSet.set_id,
-            name: legoShopSet.descr,
-            imagePath: legoShopSet.img_tn,
-            status: Status[Status.New]
-        };
+        this.legoShopService.findOne(legoShopSetId)
+            .subscribe((legoShopSet) => {
+                this.currentLegoSet = <LegoSet>{
+                    externalId: legoShopSet.set_id,
+                    name: legoShopSet.descr,
+                    imagePath: legoShopSet.img_tn,
+                    status: Status[Status.New]
+                };
+            }, (error) => {
+                console.error(error.statusText);
+                this.router.navigate(['dashboard']);
+            });
     }
 
     showLegoSetDetailsById(legoSetId: number) {}

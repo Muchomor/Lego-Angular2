@@ -25,7 +25,11 @@ export class LegoShopDetailsComponent implements OnInit {
 
     findLegoShopSetById(id: string): void {
         if (id) {
-            this.currentLegoShopSet = this.legoShopService.findOne(id);
+            this.legoShopService.findOne(id)
+                .subscribe(
+                    (res) => this.currentLegoShopSet = res,
+                    (error) => console.error(error.statusText)
+                );
         } else {
             console.error('lego set not found');
             this.router.navigate(['dashboard']);

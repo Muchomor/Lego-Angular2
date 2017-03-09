@@ -4,10 +4,11 @@ import { LegoShopDetailsComponent } from './lego-shop-details/legoShopDetails.co
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpModule } from '@angular/http';
 
 
 @NgModule({
-    imports: [CommonModule, RouterModule],
+    imports: [CommonModule, RouterModule, HttpModule],
     declarations: [LegoShopSetsComponent, LegoShopDetailsComponent, DashboardComponent],
     exports: [],
     providers: []

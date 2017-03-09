@@ -1,61 +1,198 @@
-import { LegoShopSet } from './LegoShopSet';
+import { TestBed, inject } from '@angular/core/testing';
+import {
+    BaseRequestOptions,
+    HttpModule,
+    Http,
+    Response,
+    ResponseOptions
+} from '@angular/http';
+import { MockBackend } from '@angular/http/testing';
 import { LegoShopService } from './legoShop.service';
 
-describe('LegoShopService Tests', () => {
-
-    let legoShopService: LegoShopService;
+describe('LegoShopService', () => {
 
     beforeEach(() => {
-        legoShopService = new LegoShopService();
+
+        TestBed.configureTestingModule({
+            imports: [HttpModule],
+            providers: [
+                { provide: LegoShopService, useClass: LegoShopService },
+                {
+                    provide: Http,
+                    useFactory: (mockBackend: MockBackend, options: BaseRequestOptions) => {
+                        return new Http(mockBackend, options);
+                    },
+                    deps: [MockBackend, BaseRequestOptions]
+                },
+                MockBackend,
+                BaseRequestOptions
+            ]
+        });
     });
 
-    it('should return all lego sets', () => {
-        // given
-        let result: LegoShopSet[];
+    describe('LegoShopService', () => {
 
-        // when
-        result = legoShopService.getLegoSets();
+        it('should return an Observable<Array<LegoShopSet>>',
+            inject([LegoShopService, MockBackend], (legoShopService: LegoShopService, mockBackend: MockBackend) => {
 
-        // then
-        expect(result.length).toBe(8);
-    });
+                const mockResponse = {
+                    results: [
+                        {
+                            set_id: '1',
+                            pieces: '100',
+                            descr: 'Description 1',
+                            theme1: 'Lego Set 1',
+                            year: '2017',
+                            img_sm: 'images/lego_placeholder.png'
+                        },
+                        {
+                            set_id: '2',
+                            pieces: '100',
+                            descr: 'Description 2',
+                            theme1: 'Lego Set 2',
+                            year: '2017',
+                            img_sm: 'images/lego_placeholder.png'
+                        }
+                    ]
+                };
 
-    it('should return filtered lego sets', () => {
-        // given
-        const query = 'dog';
-        let result: LegoShopSet[];
+                mockBackend.connections.subscribe((connection: any) => {
+                    connection.mockRespond(new Response(new ResponseOptions({
+                        body: JSON.stringify(mockResponse)
+                    })));
+                });
 
-        // when
-        result = legoShopService.getLegoSets(query);
+                legoShopService.getLegoSets().subscribe((legoShopSets) => {
+                    expect(legoShopSets.length).toBe(2);
+                    expect(legoShopSets[0].theme1).toEqual('Lego Set 1');
+                    expect(legoShopSets[1].theme1).toEqual('Lego Set 2');
+                });
+            }));
 
-        // then
-        expect(result.length).toBe(1);
-        expect(result[0].descr).toBe('Dog');
-    });
+            it('should return Observable<LegoShopSet> for search query',
+            inject([LegoShopService, MockBackend], (legoShopService: LegoShopService, mockBackend: MockBackend) => {
 
-    it('should return top 3 lego sets', () => {
-        // given
-        let result: LegoShopSet[];
+                const mockResponse = {
+                    results: [
+                        {
+                            set_id: '1',
+                            pieces: '100',
+                            descr: 'Description 1',
+                            theme1: 'Lego Set 1',
+                            year: '2017',
+                            img_sm: 'images/lego_placeholder.png'
+                        },
+                        {
+                            set_id: '2',
+                            pieces: '100',
+                            descr: 'Description 2',
+                            theme1: 'Lego Set 2',
+                            year: '2017',
+                            img_sm: 'images/lego_placeholder.png'
+                        }
+                    ]
+                };
 
-        // when
-        result = legoShopService.getTop3Sets();
+                mockBackend.connections.subscribe((connection: any) => {
+                    connection.mockRespond(new Response(new ResponseOptions({
+                        body: JSON.stringify(mockResponse)
+                    })));
+                });
 
-        // then
-        expect(result.length).toBe(3);
-        expect(result[0].descr).toBe('Schrodingers Cat');
-        expect(result[1].descr).toBe('Cat and Mouse');
-        expect(result[2].descr).toBe('\'Sirius\' EV3 Robot for FLL');
-    });
+                legoShopService.getLegoSets('Description 1').subscribe((legoShopSets) => {
+                    expect(legoShopSets.length).toBe(1);
+                    expect(legoShopSets[0].descr).toEqual('Description 1');
+                    expect(legoShopSets[0].theme1).toEqual('Lego Set 1');
+                });
+            }));
 
-    it('should find one lego set', () => {
-        // given
-        const id = 'MOC-0757';
-        let result: LegoShopSet;
+            it('should return top 3 Observable<Array<LegoShopSet>>',
+            inject([LegoShopService, MockBackend], (legoShopService: LegoShopService, mockBackend: MockBackend) => {
 
-        // when
-        result = legoShopService.findOne(id);
+                const mockResponse = {
+                    results: [
+                        {
+                            set_id: '1',
+                            pieces: '100',
+                            descr: 'Fire 1',
+                            theme1: 'Lego Set 1',
+                            year: '2017',
+                            img_sm: 'images/lego_placeholder.png'
+                        },
+                        {
+                            set_id: '2',
+                            pieces: '100',
+                            descr: 'Fire 2',
+                            theme1: 'Lego Set 2',
+                            year: '2017',
+                            img_sm: 'images/lego_placeholder.png'
+                        },
+                        {
+                            set_id: '3',
+                            pieces: '100',
+                            descr: 'Fire 3',
+                            theme1: 'Lego Set 3',
+                            year: '2017',
+                            img_sm: 'images/lego_placeholder.png'
+                        },
+                        {
+                            set_id: '4',
+                            pieces: '100',
+                            descr: 'Fire 4',
+                            theme1: 'Lego Set 4',
+                            year: '2017',
+                            img_sm: 'images/lego_placeholder.png'
+                        }
+                    ]
+                };
 
-        // then
-        expect(result.descr).toBe('Schrodingers Cat');
+                mockBackend.connections.subscribe((connection: any) => {
+                    connection.mockRespond(new Response(new ResponseOptions({
+                        body: JSON.stringify(mockResponse)
+                    })));
+                });
+
+                legoShopService.getTop3Sets().subscribe((legoShopSets) => {
+                    expect(legoShopSets.length).toBe(3);
+                    expect(legoShopSets[0].theme1).toEqual('Lego Set 1');
+                    expect(legoShopSets[1].theme1).toEqual('Lego Set 2');
+                    expect(legoShopSets[2].theme1).toEqual('Lego Set 3');
+                });
+            }));
+
+        it('should return an Observable<LegoShopSet>',
+            inject([LegoShopService, MockBackend], (legoShopService: LegoShopService, mockBackend: MockBackend) => {
+
+                const mockResponse = {
+                    results: [
+                        {
+                            set_id: '1',
+                            pieces: '100',
+                            descr: 'Fire 1',
+                            theme1: 'Lego Set 1',
+                            year: '2017',
+                            img_sm: 'images/lego_placeholder.png'
+                        },
+                        {
+                            set_id: '2',
+                            pieces: '100',
+                            descr: 'Fire 2',
+                            theme1: 'Lego Set 2',
+                            year: '2017',
+                            img_sm: 'images/lego_placeholder.png'
+                        }
+                    ]
+                };
+
+                mockBackend.connections.subscribe((connection: any) => {
+                    connection.mockRespond(new Response(new ResponseOptions({
+                        body: JSON.stringify(mockResponse)
+                    })));
+                });
+
+                legoShopService.findOne('1').subscribe((legoShopSet) => {
+                    expect(legoShopSet.theme1).toEqual('Lego Set 1');
+                });
+            }));
     });
 });

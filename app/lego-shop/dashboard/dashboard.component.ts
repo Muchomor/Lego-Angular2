@@ -12,8 +12,11 @@ export class DashboardComponent implements OnInit {
 
     constructor(private legoShopService: LegoShopService) { }
 
-    ngOnInit(): void {
-        this.items = this.legoShopService.getTop3Sets();
+    ngOnInit() {
+        this.legoShopService.getTop3Sets()
+            .subscribe((res) => {
+                this.items = res;
+            });
     }
 
 };
