@@ -8,6 +8,9 @@ import 'rxjs/add/observable/of';
 @Injectable()
 export class LegoSetService {
 
+    // TODO: Import Http (from '@angular/http) and inject it to LegoSetService 
+    // TODO: Implement all the service methods using http, use API exposed by JSON server. Endpoint: '/services/lego-sets'
+
     getLegoSets(): Observable<LegoSet[]> {
         throw new Error('not implemented');
     }

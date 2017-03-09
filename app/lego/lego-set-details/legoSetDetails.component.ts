@@ -5,6 +5,9 @@ import { LegoShopService } from './../../shared/legoShop.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
+// TODO: Extend legoShopService to use Http and align showLegoSetDetailsByLegoShopSetId method 
+// TODO: Implement showLegoSetDetailsById method, use legoSetService to find specific set by id
+// TODO: implement save method, re-implement legoSetService save method to use API exposed by json-server
 
 @Component({
     template: require('app/lego/lego-set-details/legoSetDetails.component.html!text')
