@@ -5,9 +5,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 
-// TODO: Implement showLegoSetDetailsById method, use legoSetService to find specific set by id
-// TODO: implement save method, re-implement legoSetService save method to use API exposed by json-server
-
 @Component({
     template: require('app/lego/lego-set-details/legoSetDetails.component.html!text')
 })
@@ -40,6 +37,13 @@ export class LegoSetDetailsComponent implements OnInit {
 
     }
 
+    private navigateToErrorHandler(toPath: string): (error: any) => void {
+        return (error) => {
+                console.error(error.statusText);
+                this.router.navigate([toPath]);
+            };
+    }
+
     showLegoSetDetailsByLegoShopSetId(legoShopSetId: string) {
         this.legoShopService.findOne(legoShopSetId)
             .subscribe((legoShopSet) => {
@@ -49,20 +53,23 @@ export class LegoSetDetailsComponent implements OnInit {
                     imagePath: legoShopSet.img_tn,
                     status: Status[Status.New]
                 };
-            }, (error) => {
-                console.error(error.statusText);
-                this.router.navigate(['dashboard']);
-            });
+            }, this.navigateToErrorHandler('dashboard'));
     }
 
-    showLegoSetDetailsById(legoSetId: number) {}
+    showLegoSetDetailsById(legoSetId: number) {
+        this.legoSetService.findOne(legoSetId)
+            .subscribe((res) => {
+                this.currentLegoSet = res;
+            }, this.navigateToErrorHandler('lego-set-details'));
+    }
 
     onStatusChange(newValue: string): void {
         this.currentLegoSet.status = newValue;
     }
 
     save(): void {
-        this.legoSetService.save(this.currentLegoSet);
+        this.legoSetService.save(this.currentLegoSet)
+            .subscribe(res => this.router.navigate(['lego-sets']));
     }
 
 }

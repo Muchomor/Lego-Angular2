@@ -10,7 +10,6 @@ export class LegoSetService {
 
     private readonly setsApiBaseUrl = '/services/lego-sets';
 
-    // TODO: Implement all the service methods using http, use API exposed by JSON server
     constructor(private http: Http) {}
 
     getLegoSets(): Observable<LegoSet[]> {
