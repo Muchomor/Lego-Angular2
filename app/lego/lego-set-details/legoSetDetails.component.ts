@@ -51,7 +51,13 @@ export class LegoSetDetailsComponent implements OnInit {
 
     showLegoSetDetailsById(legoSetId: number) {}
 
-    onStatusChange(newValue: string): void {}
+    onStatusChange(newValue: string): void {
+        this.currentLegoSet.status = newValue;
+    }
 
     save(): void {}
+
+    diagnostic() {
+        return JSON.stringify(this.currentLegoSet);
+    }
 }

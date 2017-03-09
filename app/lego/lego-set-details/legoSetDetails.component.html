@@ -17,7 +17,7 @@
     <div class="form-group row">
       <label for="status" class="col-md-2 col-form-label">Status:</label>
       <div class="col-md-6">
-        <select id="status" [(ngModel)]="currentLegoSet.status" #status="ngModel" name="status" class="form-control">
+        <select id="status" (ngModelChange)="onStatusChange($event)" [(ngModel)]="currentLegoSet.status" #status="ngModel" name="status" class="form-control">
           <option [value]="status" *ngFor="let status of statuses">{{status}}</option>
         </select>
       </div>
@@ -35,5 +35,6 @@
 
   </form>
 
+  <div>{{diagnostic()}}</div>
 
 </div>
