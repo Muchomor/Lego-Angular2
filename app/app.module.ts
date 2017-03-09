@@ -1,4 +1,3 @@
-import { LegoShopService } from './shared/legoShop.service';
 import { AppRoutingModule } from './app-routing.module';
 import { LegoModule } from './lego/lego.module';
 import { LegoShopModule } from './lego-shop/legoShop.module';
@@ -11,7 +10,7 @@ import { FormsModule } from '@angular/forms';
   imports: [BrowserModule, LegoModule, LegoShopModule, AppRoutingModule, FormsModule],
   declarations: [AppComponent],
   bootstrap: [AppComponent],
-  providers: [LegoShopService]
+  providers: []
 })
 export class AppModule {
 }
